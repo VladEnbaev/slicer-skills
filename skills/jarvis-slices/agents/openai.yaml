@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jarvis Slices"
+  short_description: "Plan and execute agreed implementation slices"
+  default_prompt: "Use $jarvis-slices to split this work into approved slices."

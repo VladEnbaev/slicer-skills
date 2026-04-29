@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jarvis Scouting"
+  short_description: "Read-first context scouting before decisions"
+  default_prompt: "Use $jarvis-scouting to understand the relevant context first."
