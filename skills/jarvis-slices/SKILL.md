@@ -25,6 +25,8 @@ Each slice should leave the system in a coherent state. Prefer vertical or depen
 
 Get approval for the slice map before executing the first slice.
 
+If another planning mode or tool requires a complete plan, keep the plan slice-first. The plan is complete only when every slice has a purpose, boundary, test decision, verification strategy, and checkpoint. Do not ask for approval to execute a whole multi-slice project at once when the safer approval boundary is the slice map or the next slice.
+
 ## Slice Brief
 
 Before executing each slice, state:

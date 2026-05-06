@@ -9,6 +9,7 @@ This repository contains reusable Codex skills. Keep them universal: do not add 
 - Do not create large spec files or process documents unless they are needed by the skill itself.
 - Prefer clear behavioral rules over long examples.
 - Preserve the core model: senior copilot, read-first scouting, decision gates, agreed slices, evidence-based debugging.
+- If an external planning mode requires a complete plan, express that plan through Jarvis slice boundaries instead of one monolithic execution plan.
 
 ## Editing Skills
 
