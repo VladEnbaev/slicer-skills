@@ -1,0 +1,33 @@
+{
+  "name": "slicer-skills",
+  "version": "0.1.0",
+  "description": "Slice-first workflow skills for Codex agents.",
+  "author": {
+    "name": "Slicer Skills contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "skills",
+    "workflow",
+    "slices"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Slicer Skills",
+    "shortDescription": "Slice-first workflow skills for Codex agents",
+    "longDescription": "Slicer Skills helps Codex agents scout context first, use checkpoints for meaningful decisions, plan work in reviewable slices, execute one approved slice at a time, and debug from root cause.",
+    "developerName": "Slicer Skills contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $slicer-copilot for this task.",
+      "Use $slicer-planning to split this into slices.",
+      "Use $slicer-debugging to investigate this failure."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

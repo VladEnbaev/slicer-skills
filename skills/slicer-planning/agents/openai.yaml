@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slicer Planning"
+  short_description: "Plan slice-first work with boundaries and verification"
+  default_prompt: "Use $slicer-planning to split this work into approved slices with checkpoints."

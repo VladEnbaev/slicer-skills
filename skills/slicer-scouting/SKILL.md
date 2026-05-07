@@ -1,9 +1,9 @@
 ---
-name: jarvis-scouting
+name: slicer-scouting
 description: Use when existing context must be understood before recommendations, planning, debugging, refactoring, implementation, or approval questions; applies to codebases, docs, issues, logs, configs, APIs, and prior decisions.
 ---
 
-# Jarvis Scouting
+# Slicer Scouting
 
 ## Overview
 

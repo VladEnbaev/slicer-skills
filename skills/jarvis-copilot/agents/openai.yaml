@@ -1,4 +1,0 @@
-interface:
-  display_name: "Jarvis Copilot"
-  short_description: "Senior copilot workflow with discovery questions and gates"
-  default_prompt: "Use $jarvis-copilot to guide this non-trivial engineering task."

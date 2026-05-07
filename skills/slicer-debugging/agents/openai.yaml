@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slicer Debugging"
+  short_description: "Root-cause debugging with evidence first"
+  default_prompt: "Use $slicer-debugging to investigate this failure before fixing it."

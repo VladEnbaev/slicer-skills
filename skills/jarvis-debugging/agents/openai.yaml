@@ -1,4 +1,0 @@
-interface:
-  display_name: "Jarvis Debugging"
-  short_description: "Root-cause debugging with evidence first"
-  default_prompt: "Use $jarvis-debugging to investigate this failure before fixing it."

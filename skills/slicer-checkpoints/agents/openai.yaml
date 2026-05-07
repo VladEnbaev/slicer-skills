@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slicer Checkpoints"
+  short_description: "Approval checkpoints for meaningful engineering choices"
+  default_prompt: "Use $slicer-checkpoints before choosing the next major step."

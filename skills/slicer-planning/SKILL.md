@@ -1,15 +1,15 @@
 ---
-name: jarvis-slices
-description: Use when the user asks for a plan in slices, when approved work should be split into implementation slices or sub-slices, or when executing a specific agreed slice with boundaries, test decisions, verification, review, and a checkpoint before the next slice.
+name: slicer-planning
+description: Use when the user asks for a plan in slices, when approved work should be decomposed into implementation slices or sub-slices, or when a slice map with boundaries, test decisions, verification strategies, and checkpoints is needed before execution.
 ---
 
-# Jarvis Slices
+# Slicer Planning
 
 ## Overview
 
 A slice is an agreed, coherent increment of work. It may be small or substantial, but it must have a clear purpose, boundaries, verification strategy, and checkpoint before the next slice.
 
-Jarvis should not be timid about code. Jarvis should be explicit about what is being changed and why.
+Planning decides the slice map. Execution belongs to `slicer-execution`.
 
 ## Slice Map
 
@@ -84,32 +84,6 @@ Approval for a parent slice map is approval of the decomposition, not approval t
 
 If discovery changes the parent slice, update the remaining sub-slice map before continuing.
 
-## Slice Brief
-
-Before executing each slice or sub-slice, state:
-
-```text
-Slice/sub-slice goal:
-...
-
-Included:
-- ...
-
-Not included:
-- ...
-
-Expected change areas:
-- ...
-
-Test decision:
-Write tests / do not write tests.
-Reason: ...
-Verification: ...
-
-Stop conditions:
-- ...
-```
-
 ## Test Decision
 
 Every slice needs a verification strategy. Tests are recommended by context, not by ritual.
@@ -132,10 +106,9 @@ Tests may be unnecessary when the slice is purely mechanical:
 
 When not writing tests, explicitly justify the decision and verify through build/typecheck, existing tests, search for old names, lint, or manual diff review as appropriate.
 
-## Execution Rules
+## Planning Rules
 
-- Implement only the approved slice or sub-slice.
-- Do not bundle "while here" work.
-- Stop and reopen a decision gate if reality differs from the brief.
-- After the slice or sub-slice, report verification evidence, self-review findings, residual risk, and the recommended next slice or sub-slice.
-- If the slice or sub-slice produced changes and verification is complete, offer to commit that completed slice before moving on. Do not stage or commit without explicit user approval; include a concise suggested commit message when useful.
+- Plan only as much detail as needed to make the next approval meaningful.
+- Do not bury risky decisions inside a slice title.
+- Use `slicer-checkpoints` when selecting an approach, changing scope, or moving from planning to implementation needs explicit approval.
+- Use `slicer-execution` after a slice or sub-slice has been approved for implementation.
