@@ -1,6 +1,6 @@
 ---
 name: jarvis-slices
-description: Use when the user asks for a plan in slices, when approved work should be split into implementation slices, or when executing a specific agreed slice with boundaries, test decisions, verification, review, and a checkpoint before the next slice.
+description: Use when the user asks for a plan in slices, when approved work should be split into implementation slices or sub-slices, or when executing a specific agreed slice with boundaries, test decisions, verification, review, and a checkpoint before the next slice.
 ---
 
 # Jarvis Slices
@@ -56,12 +56,40 @@ Do not replace the slice map with a file list, subsystem plan, phase list, or ge
 
 Before the final answer, check that each planned slice has an explicit `Slice N:` heading, starting with `Slice 1:`.
 
-## Slice Brief
+## Sub-Slices
 
-Before executing each slice, state:
+For substantial slices, make sub-slices the normal execution unit:
 
 ```text
-Slice goal:
+Slice 1: ...
+
+Sub-slices:
+1.1 ...
+1.2 ...
+1.3 ...
+```
+
+A parent slice is a milestone. A sub-slice is the smallest approved implementation step.
+
+Break a slice into sub-slices when it:
+
+- changes multiple contracts, modules, lifecycles, or user-facing paths;
+- has phases that can be reviewed or verified independently;
+- needs staged human control before the whole slice is complete;
+- would otherwise produce a large, hard-to-review diff.
+
+Each sub-slice should be coherent on its own, but it does not need to deliver the full parent-slice outcome. It should either leave the system working or have an explicit temporary constraint that is safe and understood.
+
+Approval for a parent slice map is approval of the decomposition, not approval to execute every sub-slice. Execute only the requested or approved sub-slice, then stop at a checkpoint and recommend the next sub-slice.
+
+If discovery changes the parent slice, update the remaining sub-slice map before continuing.
+
+## Slice Brief
+
+Before executing each slice or sub-slice, state:
+
+```text
+Slice/sub-slice goal:
 ...
 
 Included:
@@ -106,7 +134,7 @@ When not writing tests, explicitly justify the decision and verify through build
 
 ## Execution Rules
 
-- Implement only the approved slice.
+- Implement only the approved slice or sub-slice.
 - Do not bundle "while here" work.
 - Stop and reopen a decision gate if reality differs from the brief.
-- After the slice, report verification evidence, self-review findings, residual risk, and the recommended next slice.
+- After the slice or sub-slice, report verification evidence, self-review findings, residual risk, and the recommended next slice or sub-slice.
