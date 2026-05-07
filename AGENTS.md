@@ -15,6 +15,7 @@ This repository contains reusable Codex skills. Keep them universal: do not add 
 
 - Use lowercase hyphen-case skill names.
 - Keep `agents/openai.yaml` in sync with each `SKILL.md`.
+- Keep these skills plugin-only; do not add standalone install flows that link them into `${CODEX_HOME:-$HOME/.codex}/skills`.
 - Do not duplicate the same workflow across multiple skills. If behavior belongs everywhere, put it in `slicer-copilot`.
 - When changing `slicer-planning` or `slicer-execution`, preserve the rule that each slice has a test decision and verification strategy.
 - When changing `slicer-debugging`, preserve the rule: no fix before root cause.

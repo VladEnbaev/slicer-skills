@@ -46,15 +46,9 @@ Slicer Skills is designed to avoid common agent failure modes:
 
 ## Installation for Codex
 
-Run:
+Install and enable this repository as a Codex plugin through its `.codex-plugin/plugin.json`.
 
-```bash
-./scripts/install.sh
-```
-
-The script links every skill from `skills/*` into `${CODEX_HOME:-$HOME/.codex}/skills`.
-
-If a Codex session was already running, start a new session so the skill list is refreshed.
+Do not link `skills/*` into `${CODEX_HOME:-$HOME/.codex}/skills`; these skills are intended to be exposed only through the plugin. If a Codex session was already running, start a new session so the skill list is refreshed.
 
 ## Usage
 

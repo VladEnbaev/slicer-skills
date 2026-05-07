@@ -88,6 +88,9 @@ def parse_simple_yaml(path):
 if not skills_dir.is_dir():
     errors.append(f"{skills_dir}: missing skills directory")
 
+if (repo_root / "scripts" / "install.sh").exists():
+    errors.append("scripts/install.sh: standalone skill installer is not allowed; expose skills through the plugin")
+
 for skill_dir in sorted((repo_root / "skills").iterdir()):
     if not skill_dir.is_dir():
         continue
