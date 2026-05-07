@@ -138,3 +138,4 @@ When not writing tests, explicitly justify the decision and verify through build
 - Do not bundle "while here" work.
 - Stop and reopen a decision gate if reality differs from the brief.
 - After the slice or sub-slice, report verification evidence, self-review findings, residual risk, and the recommended next slice or sub-slice.
+- If the slice or sub-slice produced changes and verification is complete, offer to commit that completed slice before moving on. Do not stage or commit without explicit user approval; include a concise suggested commit message when useful.
