@@ -1,6 +1,6 @@
 ---
 name: jarvis-slices
-description: Use when approved work should be split into implementation slices, or when executing a specific agreed slice with boundaries, test decisions, verification, review, and a checkpoint before the next slice.
+description: Use when the user asks for a plan in slices, when approved work should be split into implementation slices, or when executing a specific agreed slice with boundaries, test decisions, verification, review, and a checkpoint before the next slice.
 ---
 
 # Jarvis Slices
@@ -26,6 +26,35 @@ Each slice should leave the system in a coherent state. Prefer vertical or depen
 Get approval for the slice map before executing the first slice.
 
 If another planning mode or tool requires a complete plan, keep the plan slice-first. The plan is complete only when every slice has a purpose, boundary, test decision, verification strategy, and checkpoint. Do not ask for approval to execute a whole multi-slice project at once when the safer approval boundary is the slice map or the next slice.
+
+## Final Answer Contract
+
+When this skill is used for planning, or when the user asks for a plan in slices, the final answer must be slice-first. Start with the slice map before summaries, file lists, subsystem plans, or general roadmap text.
+
+Use this required format for each slice:
+
+```text
+Slice N: Title
+
+Goal:
+...
+
+Included:
+- ...
+
+Not included:
+- ...
+
+Test decision / Verification:
+...
+
+Checkpoint / Stop condition:
+...
+```
+
+Do not replace the slice map with a file list, subsystem plan, phase list, or general roadmap.
+
+Before the final answer, check that each planned slice has an explicit `Slice N:` heading, starting with `Slice 1:`.
 
 ## Slice Brief
 
