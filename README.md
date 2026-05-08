@@ -8,7 +8,9 @@ The skills are still at an early stage. Names, wording, and workflow details may
 
 ## Main Idea: Slices
 
-A slice is one coherent increment of work with clear boundaries.
+*A slice is one coherent increment of work with clear boundaries.*
+
+<img width="845" height="360" alt="ezgif-822f8e94e82cb3ec" src="https://github.com/user-attachments/assets/e81187c4-2aa8-4734-a0fb-619fb3af88b5" />
 
 Each slice should answer:
 
@@ -22,8 +24,6 @@ Each slice should answer:
 For larger work, Slicer can split a slice into sub-slices when that slice is about to be executed. The first map should stay understandable. A parent slice is a milestone; a sub-slice is the smaller implementation step used when the milestone is still too large to review safely.
 
 That is the core feature of this repository: the agent should not treat "make this refactor" as permission to do the whole thing in one pass. It should map the work, execute one approved slice, show evidence, and only then move on.
-
-<img width="845" height="360" alt="ezgif-822f8e94e82cb3ec" src="https://github.com/user-attachments/assets/e81187c4-2aa8-4734-a0fb-619fb3af88b5" />
 
 ## Workflow
 
