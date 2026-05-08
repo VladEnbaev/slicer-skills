@@ -6,22 +6,6 @@ It is not trying to make an agent write more code at any cost. The point is quie
 
 The skills are still at an early stage. Names, wording, and workflow details may change as the workflow is tested on real engineering tasks.
 
-## Why This Exists
-
-AI coding agents are useful, but they can make the wrong kind of progress very quickly.
-
-The failure mode this project cares about most is not "the agent was too slow." It is:
-
-- it changed too much at once;
-- it guessed instead of reading the codebase;
-- it moved responsibility across boundaries without saying so;
-- it hid an architectural decision inside implementation;
-- it skipped the test decision or wrote tests mechanically;
-- it fixed a symptom without proving the root cause;
-- it left the human to review one big diff after the important decisions were already made.
-
-Slicer is for developers who are okay with agent help, but still want to protect the shape, ownership, and reviewability of their code.
-
 ## Main Idea: Slices
 
 A slice is one coherent increment of work with clear boundaries.
@@ -138,41 +122,6 @@ The shared source of truth is `skills/*/SKILL.md`. Agent-specific files only tel
 - `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` for Claude Code plugins;
 - `.codex-plugin/plugin.json` for Codex-compatible plugin loading;
 - `gemini-extension.json` and `GEMINI.md` for Gemini CLI extensions.
-
-### Claude Code
-
-For local development, run Claude Code with this repository as a plugin directory:
-
-```bash
-claude --plugin-dir /path/to/slicer-skills
-```
-
-After publishing the repository, it can also be added as a Claude Code marketplace:
-
-```text
-/plugin marketplace add owner/slicer-skills
-/plugin install slicer-skills@slicer-skills-marketplace
-```
-
-Claude plugin skills are namespaced, so invoke them as `/slicer-skills:slicer-copilot`, `/slicer-skills:slicer-planning`, and so on.
-
-### Gemini CLI
-
-Install the repository as a Gemini CLI extension:
-
-```bash
-gemini extensions install https://github.com/owner/slicer-skills
-```
-
-For local development, link the working tree instead:
-
-```bash
-gemini extensions link /path/to/slicer-skills
-```
-
-Gemini loads `GEMINI.md` as extension context. That file references the Slicer skills and tells the agent when to apply them.
-
-### Other Agents
 
 Other coding agents can still use Slicer by loading or referencing the `SKILL.md` files directly. If an agent supports extension manifests, add a thin adapter that points at `skills/*/SKILL.md` instead of copying the workflow into another format.
 
