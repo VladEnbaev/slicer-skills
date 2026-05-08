@@ -1,6 +1,6 @@
 ---
 name: slicer-checkpoints
-description: Use when an agent is about to choose an approach, move to another phase, start implementation, expand scope, change public contracts, move between slices, or continue after discovering meaningful uncertainty or risk.
+description: Use for continue checkpoints after verified slices, or when an agent must stop before choosing an approach, expanding scope, changing public contracts, moving between slices, or continuing after meaningful uncertainty or risk.
 ---
 
 # Slicer Checkpoints
@@ -21,6 +21,8 @@ Open a checkpoint before:
 - changing public APIs, module boundaries, schemas, migrations, lifecycle, concurrency, persistence, or error handling;
 - expanding scope beyond what was approved;
 - continuing after evidence contradicts the original plan.
+
+After every verified slice or sub-slice, use a continue checkpoint. This is the normal stop between slices.
 
 ## Checkpoint Format
 
@@ -52,3 +54,24 @@ For simple binary decisions, use two options. For architectural tradeoffs, use u
 Continue only after explicit approval such as "yes", "confirmed", "choose B", "go ahead", or an equivalent instruction.
 
 If the user gives new constraints instead of approval, incorporate them and reopen the checkpoint.
+
+## Continue Checkpoint
+
+Use this compact format after a slice or sub-slice is verified:
+
+```text
+Verification:
+- ...
+
+Options:
+A. Continue with the next slice/sub-slice.
+B. Revise the slice map.
+C. Return to scouting because assumptions changed or the work went off track.
+D. Stop here.
+
+Recommendation:
+I recommend ... because ...
+
+Approval needed:
+Confirm ... before I continue.
+```

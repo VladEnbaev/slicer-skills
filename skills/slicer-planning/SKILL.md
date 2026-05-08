@@ -1,13 +1,13 @@
 ---
 name: slicer-planning
-description: Use when the user asks for a plan in slices, when approved work should be decomposed into implementation slices or sub-slices, or when a slice map with boundaries, test decisions, verification strategies, and checkpoints is needed before execution.
+description: Use when the user asks for a plan in slices, when approved work should be decomposed into a readable implementation slice map, or when slice boundaries, test decisions, verification strategies, and stop conditions are needed before execution.
 ---
 
 # Slicer Planning
 
 ## Overview
 
-A slice is an agreed, coherent increment of work. It may be small or substantial, but it must have a clear purpose, boundaries, verification strategy, and checkpoint before the next slice.
+A slice is an agreed, coherent increment of work. It may be small or substantial, but it must have a clear purpose, boundaries, verification strategy, and stop condition before the next slice.
 
 Planning decides the slice map. Execution belongs to `slicer-execution`.
 
@@ -25,7 +25,7 @@ Each slice should leave the system in a coherent state. Prefer vertical or depen
 
 Get approval for the slice map before executing the first slice.
 
-If another planning mode or tool requires a complete plan, keep the plan slice-first. The plan is complete only when every slice has a purpose, boundary, test decision, verification strategy, and checkpoint. Do not ask for approval to execute a whole multi-slice project at once when the safer approval boundary is the slice map or the next slice.
+If another planning mode or tool requires a complete plan, keep the plan slice-first. The plan is complete only when every slice has a purpose, boundary, test decision, verification strategy, and stop condition. Do not ask for approval to execute a whole multi-slice project at once when the safer approval boundary is the slice map or the next slice.
 
 ## Final Answer Contract
 
@@ -48,7 +48,7 @@ Not included:
 Test decision / Verification:
 ...
 
-Checkpoint / Stop condition:
+Stop condition:
 ...
 ```
 
@@ -58,31 +58,11 @@ Before the final answer, check that each planned slice has an explicit `Slice N:
 
 ## Sub-Slices
 
-For substantial slices, make sub-slices the normal execution unit:
+Do not decompose every substantial slice into sub-slices during initial planning. That makes the plan harder for a human to evaluate.
 
-```text
-Slice 1: ...
+The initial slice map should stay readable and milestone-level. Mention that a slice may need sub-slices only when that risk is important for approval.
 
-Sub-slices:
-1.1 ...
-1.2 ...
-1.3 ...
-```
-
-A parent slice is a milestone. A sub-slice is the smallest approved implementation step.
-
-Break a slice into sub-slices when it:
-
-- changes multiple contracts, modules, lifecycles, or user-facing paths;
-- has phases that can be reviewed or verified independently;
-- needs staged human control before the whole slice is complete;
-- would otherwise produce a large, hard-to-review diff.
-
-Each sub-slice should be coherent on its own, but it does not need to deliver the full parent-slice outcome. It should either leave the system working or have an explicit temporary constraint that is safe and understood.
-
-Approval for a parent slice map is approval of the decomposition, not approval to execute every sub-slice. Execute only the requested or approved sub-slice, then stop at a checkpoint and recommend the next sub-slice.
-
-If discovery changes the parent slice, update the remaining sub-slice map before continuing.
+Sub-slices are normally created by `slicer-execution` when a specific slice has been approved and the agent is about to start that slice. At that point, split only the selected slice, ask approval for the first sub-slice, and execute one sub-slice at a time.
 
 ## Test Decision
 
@@ -108,7 +88,7 @@ When not writing tests, explicitly justify the decision and verify through build
 
 ## Planning Rules
 
-- Plan only as much detail as needed to make the next approval meaningful.
+- Plan only as much detail as needed to make the map and the next approval meaningful.
 - Do not bury risky decisions inside a slice title.
-- Use `slicer-checkpoints` when selecting an approach, changing scope, or moving from planning to implementation needs explicit approval.
+- Use `slicer-checkpoints` when selecting an approach, changing scope, or continuing after a verified slice needs explicit approval.
 - Use `slicer-execution` after a slice or sub-slice has been approved for implementation.

@@ -1,6 +1,6 @@
 ---
 name: slicer-execution
-description: Use when executing one approved slice or sub-slice with explicit boundaries, test decision, verification, review, and a checkpoint before the next slice.
+description: Use when executing one approved slice, splitting that slice into sub-slices if needed at execution time, and reporting verification before a continue checkpoint.
 ---
 
 # Slicer Execution
@@ -10,6 +10,17 @@ description: Use when executing one approved slice or sub-slice with explicit bo
 Execute one approved slice or sub-slice at a time.
 
 Slicer should not be timid about code. Slicer should be explicit about what is being changed and why.
+
+Sub-slices belong here, not in the initial slice map. If an approved slice is still too large to execute safely, split only that slice before editing code.
+
+Break the approved slice into sub-slices when it:
+
+- changes multiple contracts, modules, lifecycles, or user-facing paths;
+- has phases that can be reviewed or verified independently;
+- needs staged human control before the whole slice is complete;
+- would otherwise produce a large, hard-to-review diff.
+
+Each sub-slice should be coherent on its own. It should either leave the system working or have an explicit temporary constraint that is safe and understood.
 
 ## Slice Brief
 
@@ -39,6 +50,24 @@ Stop conditions:
 
 If there is no approved slice or sub-slice, use `slicer-planning` or open a checkpoint before implementation.
 
+If the approved slice must be split, present the sub-slice map before implementation:
+
+```text
+Approved slice:
+...
+
+Sub-slices:
+1. ...
+2. ...
+3. ...
+
+Recommended first sub-slice:
+...
+
+Approval needed:
+Confirm before I execute this sub-slice.
+```
+
 ## Test Decision
 
 Every executed slice needs a verification strategy. Tests are recommended by context, not by ritual.
@@ -65,8 +94,9 @@ When not writing tests, explicitly justify the decision and verify through build
 
 - Implement only the approved slice or sub-slice.
 - Do not bundle "while here" work.
-- Stop and reopen a checkpoint if reality differs from the brief.
+- Stop and return to scouting if reality differs from the brief enough that the plan is no longer trustworthy.
 - After the slice or sub-slice, report verification evidence, self-review findings, residual risk, and the recommended next slice or sub-slice.
+- End with a continue checkpoint: continue to the next slice/sub-slice, revise the slice map, stop, or return to scouting if assumptions were wrong.
 - If the slice or sub-slice produced changes and verification is complete, offer to commit that completed slice before moving on. Do not stage or commit without explicit user approval; include a concise suggested commit message when useful.
 
 ## Completion Report
@@ -86,6 +116,6 @@ Self-review:
 Residual risk:
 - ...
 
-Next recommended checkpoint:
+Continue checkpoint:
 ...
 ```

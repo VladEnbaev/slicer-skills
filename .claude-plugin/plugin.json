@@ -1,0 +1,17 @@
+{
+  "name": "slicer-skills",
+  "description": "Slice-first workflow skills for coding agents.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Slicer Skills contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "workflow",
+    "slices",
+    "planning",
+    "debugging",
+    "code-review"
+  ]
+}

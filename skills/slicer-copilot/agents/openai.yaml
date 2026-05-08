@@ -1,4 +1,4 @@
 interface:
   display_name: "Slicer Copilot"
-  short_description: "Senior copilot workflow with discovery questions and checkpoints"
+  short_description: "Senior copilot workflow with readable slice maps"
   default_prompt: "Use $slicer-copilot to guide this non-trivial engineering task."

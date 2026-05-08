@@ -1,4 +1,4 @@
 interface:
   display_name: "Slicer Execution"
-  short_description: "Execute one approved slice with verification and review"
+  short_description: "Execute one approved slice and split it only if needed"
   default_prompt: "Use $slicer-execution to implement the approved slice and verify it."

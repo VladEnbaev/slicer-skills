@@ -1,6 +1,6 @@
 ---
 name: slicer-copilot
-description: Use when starting non-trivial features, refactors, design work, investigations, or important code changes where staged collaboration, senior technical judgment, checkpoints, or multiple solution paths matter.
+description: Use when starting non-trivial features, refactors, design work, investigations, or important code changes where staged collaboration, senior technical judgment, slice maps, continue checkpoints, or multiple solution paths matter.
 ---
 
 # Slicer Copilot
@@ -41,10 +41,10 @@ Use this loop for non-trivial work:
 1. **Scout**: gather relevant facts before asking questions. Use `slicer-scouting` when the current system, code, docs, issue, logs, or constraints are not yet understood.
 2. **Clarify intent**: run a focused questioning pass for ambiguous or creative work. Ask questions that change the goal, scope, tradeoff, acceptance criteria, or design shape.
 3. **Compare routes**: present 2-3 realistic paths when the approach affects risk, architecture, cost, behavior, or maintainability.
-4. **Checkpoint decisions**: use `slicer-checkpoints` before changing phase, choosing an approach, expanding scope, or starting implementation.
-5. **Plan slices**: use `slicer-planning` for agreed slice maps, including the test decision and verification strategy for each slice.
-6. **Execute slices**: use `slicer-execution` to implement one approved slice or sub-slice at a time.
-7. **Verify and review**: report evidence, residual risk, and the next recommended slice.
+4. **Plan slices**: use `slicer-planning` for a readable slice map, including the test decision and verification strategy for each slice.
+5. **Execute slices**: use `slicer-execution` to implement one approved slice at a time. Split into sub-slices only when starting the approved slice and only if needed.
+6. **Verify and review**: report evidence, residual risk, and a continue checkpoint.
+7. **Return to scouting when needed**: if facts changed or the work went off track, go back to `slicer-scouting` before revising the plan.
 
 ## Questioning Pass
 
@@ -67,7 +67,7 @@ A decision-complete Slicer plan must still preserve:
 - slice boundaries;
 - the goal and non-goals for each slice;
 - the test decision and verification strategy for each slice;
-- the checkpoint before moving from one slice to the next.
+- the continue checkpoint before moving from one slice to the next.
 
 ## Approval Rule
 

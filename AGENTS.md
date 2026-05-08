@@ -1,6 +1,6 @@
 # Slicer Skills Agent Guide
 
-This repository contains reusable Codex skills. Keep them universal: do not add project-specific, company-specific, language-specific, framework-specific, or product-specific rules.
+This repository contains reusable coding-agent workflow skills. Keep them universal: do not add project-specific, company-specific, language-specific, framework-specific, or product-specific rules.
 
 ## Principles
 
@@ -14,8 +14,9 @@ This repository contains reusable Codex skills. Keep them universal: do not add 
 ## Editing Skills
 
 - Use lowercase hyphen-case skill names.
-- Keep `agents/openai.yaml` in sync with each `SKILL.md`.
-- Keep these skills plugin-only; do not add standalone install flows that link them into `${CODEX_HOME:-$HOME/.codex}/skills`.
+- Keep `agents/openai.yaml` in sync with each `SKILL.md`; it is one adapter, not the source of truth.
+- Keep agent-specific adapters in sync with the shared skills: `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `gemini-extension.json`, `GEMINI.md`, and README installation notes.
+- Keep these skills plugin/extension-only; do not add standalone install flows that link or copy `skills/*` into one agent's personal skills directory.
 - Do not duplicate the same workflow across multiple skills. If behavior belongs everywhere, put it in `slicer-copilot`.
 - When changing `slicer-planning` or `slicer-execution`, preserve the rule that each slice has a test decision and verification strategy.
 - When changing `slicer-debugging`, preserve the rule: no fix before root cause.
@@ -28,4 +29,4 @@ After edits, run:
 ./scripts/validate.sh
 ```
 
-If validation cannot run because local Codex skill tooling is unavailable, manually check every `SKILL.md` has valid YAML frontmatter with `name` and `description`.
+If validation cannot run because local agent skill tooling is unavailable, manually check every `SKILL.md` has valid YAML frontmatter with `name` and `description`.

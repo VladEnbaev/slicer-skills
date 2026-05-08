@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python3 - <<'PY' "$repo_root"
 from pathlib import Path
+import json
 import re
 import sys
 
@@ -85,16 +86,67 @@ def parse_simple_yaml(path):
     return data
 
 
+def load_json(path):
+    if not path.exists():
+        errors.append(f"{path}: missing JSON file")
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"{path}:{exc.lineno}:{exc.colno}: invalid JSON: {exc.msg}")
+        return {}
+
+
 if not skills_dir.is_dir():
     errors.append(f"{skills_dir}: missing skills directory")
 
 if (repo_root / "scripts" / "install.sh").exists():
-    errors.append("scripts/install.sh: standalone skill installer is not allowed; expose skills through the plugin")
+    errors.append("scripts/install.sh: standalone skill installer is not allowed; expose skills through agent plugins/extensions")
 
+codex_plugin = load_json(repo_root / ".codex-plugin" / "plugin.json")
+claude_plugin = load_json(repo_root / ".claude-plugin" / "plugin.json")
+claude_marketplace = load_json(repo_root / ".claude-plugin" / "marketplace.json")
+gemini_extension = load_json(repo_root / "gemini-extension.json")
+
+for label, data in (
+    ("codex plugin", codex_plugin),
+    ("claude plugin", claude_plugin),
+    ("gemini extension", gemini_extension),
+):
+    for key in ("name", "description", "version"):
+        if not data.get(key):
+            errors.append(f"{label}: missing {key}")
+
+if codex_plugin.get("name") != claude_plugin.get("name"):
+    errors.append("agent manifests: codex and claude plugin names must match")
+
+if codex_plugin.get("version") != claude_plugin.get("version") or codex_plugin.get("version") != gemini_extension.get("version"):
+    errors.append("agent manifests: versions must match")
+
+if gemini_extension.get("contextFileName") != "GEMINI.md":
+    errors.append("gemini-extension.json: contextFileName must be GEMINI.md")
+
+if not (repo_root / "GEMINI.md").exists():
+    errors.append("GEMINI.md: missing Gemini extension context file")
+
+plugins = claude_marketplace.get("plugins", [])
+if not plugins:
+    errors.append("claude marketplace: missing plugins")
+else:
+    plugin = plugins[0]
+    if plugin.get("name") != claude_plugin.get("name"):
+        errors.append("claude marketplace: plugin name must match .claude-plugin/plugin.json")
+    if plugin.get("version") != claude_plugin.get("version"):
+        errors.append("claude marketplace: plugin version must match .claude-plugin/plugin.json")
+    if plugin.get("source") != "./":
+        errors.append("claude marketplace: plugin source must be ./")
+
+skill_names = []
 for skill_dir in sorted((repo_root / "skills").iterdir()):
     if not skill_dir.is_dir():
         continue
     skill_name = skill_dir.name
+    skill_names.append(skill_name)
     if not skill_name_pattern.fullmatch(skill_name):
         errors.append(f"{skill_name}: skill directory must be lowercase hyphen-case")
 
@@ -124,6 +176,12 @@ for skill_dir in sorted((repo_root / "skills").iterdir()):
 
     if not any(error.startswith(f"{skill_name}:") or f"/{skill_name}/" in error for error in errors):
         print(f"{skill_name}: valid")
+
+gemini_context = (repo_root / "GEMINI.md").read_text(encoding="utf-8") if (repo_root / "GEMINI.md").exists() else ""
+for skill_name in skill_names:
+    reference = f"@./skills/{skill_name}/SKILL.md"
+    if reference not in gemini_context:
+        errors.append(f"GEMINI.md: missing reference to {reference}")
 
 if errors:
     for error in errors:
