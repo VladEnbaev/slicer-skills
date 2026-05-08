@@ -8,6 +8,8 @@ The skills are still at an early stage. Names, wording, and workflow details may
 
 ## Main Idea: Slices
 
+<img width="845" height="360" alt="ezgif-822f8e94e82cb3ec" src="https://github.com/user-attachments/assets/e81187c4-2aa8-4734-a0fb-619fb3af88b5" />
+
 A slice is one coherent increment of work with clear boundaries.
 
 Each slice should answer:
