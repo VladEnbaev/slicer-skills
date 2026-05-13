@@ -50,11 +50,11 @@ flowchart TD
 
 In practice:
 
-1. `slicer-scouting` makes the agent read the relevant code, tests, docs, logs, and patterns before proposing changes.
+1. `slicer-scouting` makes the agent read the relevant code, tests, docs, logs, and patterns before proposing changes. It is read-only and ends at a context brief or approval checkpoint, not implementation.
 2. `slicer-planning` turns the work into a readable slice map with boundaries, test decisions, verification, and stop conditions.
 3. `slicer-execution` takes one approved slice. If that slice is still too large, it splits only that slice into sub-slices before editing code.
 4. `slicer-checkpoints` is used at the continue point: continue to the next slice, revise the map, stop, or return to scouting if the assumptions were wrong.
-5. `slicer-debugging` keeps bug work evidence-based: no fix before root cause.
+5. `slicer-debugging` keeps bug work evidence-based: no edits before root cause and an approved fix route.
 
 If a slice goes badly, the agent should not patch around confusion. It should go back to scouting, restate what changed, and rebuild the plan from the new facts.
 
@@ -109,11 +109,11 @@ After each verified slice or sub-slice, the agent should stop at a continue chec
 ## Skills
 
 - `slicer-copilot`: the main workflow for non-trivial features, refactors, design work, and investigations.
-- `slicer-scouting`: read-first context gathering before recommendations or changes.
+- `slicer-scouting`: read-only context gathering before recommendations or changes.
 - `slicer-checkpoints`: continue checkpoints between verified slices, or decision stops for scope changes, risky choices, and changed facts.
 - `slicer-planning`: slice maps with boundaries, non-goals, test decisions, verification, and stop conditions.
 - `slicer-execution`: implementation of one approved slice or sub-slice with a completion report.
-- `slicer-debugging`: debugging from evidence, with root cause before fix.
+- `slicer-debugging`: debugging from evidence, with root cause and approval before fix.
 
 ## Installation
 
