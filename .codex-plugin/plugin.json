@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Slicer Skills",
     "shortDescription": "Slice-first workflow skills for coding agents",
-    "longDescription": "Slicer Skills helps coding agents scout context first, use checkpoints for meaningful decisions, plan work in reviewable slices, execute one approved slice at a time, and debug from root cause.",
+    "longDescription": "Slicer Skills helps coding agents scout context in a read-only pass, use checkpoints for meaningful decisions, plan work in reviewable slices, execute one approved slice at a time, and debug from root cause before fixing.",
     "developerName": "Slicer Skills contributors",
     "category": "Productivity",
     "capabilities": [
@@ -30,7 +30,7 @@
     "defaultPrompt": [
       "Use $slicer-copilot for this task.",
       "Use $slicer-planning to split this into slices.",
-      "Use $slicer-debugging to investigate this failure."
+      "Use $slicer-debugging to investigate this failure before editing."
     ],
     "brandColor": "#2563EB"
   }

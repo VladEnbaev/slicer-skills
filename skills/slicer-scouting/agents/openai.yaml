@@ -1,4 +1,4 @@
 interface:
   display_name: "Slicer Scouting"
-  short_description: "Read-first context scouting before recommendations or changes"
-  default_prompt: "Use $slicer-scouting to understand the relevant context first."
+  short_description: "Read-only context scouting before recommendations or changes"
+  default_prompt: "Use $slicer-scouting to understand the relevant context before editing."
